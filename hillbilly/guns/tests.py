@@ -16,12 +16,14 @@ class GunAsDictTest(TestCase):
                            "name": "M16"},
                           gun.as_dict())
 
+
 class GunAsJSONTest(TestCase):
 
     def test_as_dict(self):
         gun = Gun.objects.create(name='M16', caliber='.65')
-        self.assertEquals('{"caliber": ".65", "id": %s, "name": "M16"}' % gun.id,
-                          gun.as_json())
+        self.assertEquals(
+            '{"caliber": ".65", "id": %s, "name": "M16"}' % gun.id,
+            gun.as_json())
 
 
 class GetGunsTest(TestCase):
