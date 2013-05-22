@@ -26,6 +26,19 @@ class GunAsJSONTest(TestCase):
             gun.as_json())
 
 
+class GunAsHTMLTest(TestCase):
+
+    def test_as_html(self):
+        gun = Gun.objects.create(name='M16', caliber='.65')
+        self.assertEquals(
+            ('<ol>'
+             '<li>id: %s</li>'
+             '<li>name: M16</li>'
+             '<li>caliber: .65</li>'
+             '</ol>' % gun.id),
+            gun.as_html())
+
+
 class GetGunsTest(TestCase):
 
     def test_empty_guns(self):

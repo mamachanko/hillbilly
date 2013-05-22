@@ -50,3 +50,29 @@ def get_gun_by_id(request, gun_id):
         return HttpResponseNotFound()
     else:
         return HttpResponse(gun.as_json(), content_type='application/json')
+
+
+class GunsJSON(View):
+
+    content_type = 'application/json'
+
+    def get(self, request):
+        guns = []
+        for gun in Gun.objects.all():
+            guns.append(gun.as_dict())
+        return HttpResponse(json.dumps({'data': guns}),
+                            content_type=self.application_type)
+
+    def post(self, request):
+        name = request.POST.get('name')
+        caliber = request.POST.get('caliber')
+
+        gun = Gun(name=name, caliber=caliber)
+        gun.save()
+
+        return HttpResponse(gun.as_json(), content_type=self.application_type)
+
+
+class GunsXML(View):
+
+    content_type = 'application/xml'

@@ -14,3 +14,10 @@ class Gun(models.Model):
 
     def as_json(self):
         return json.dumps(self.as_dict())
+
+    def as_html(self):
+        return ('<ol>'
+                '<li>id: %(id)s</li>'
+                '<li>name: %(name)s</li>'
+                '<li>caliber: %(caliber)s</li>'
+                '</ol>' % self.as_dict())
